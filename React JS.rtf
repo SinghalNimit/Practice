@@ -1,0 +1,1140 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2509
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25300\viewh12640\viewkind1
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 React\
+\
+Install NodeJS\
+VS Code\
+Open terminal\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 npx create-react-app hello-world
+\f0\b0 \
+(https://create-react-app.dev/docs/getting-started/)\
+cd hello-world\
+npm start\
+\
+In src folder App.js file\
+Edit src/App.js to hello world\
+<p>Hello World</p>\
+Check it\
+\
+
+\f1\b Folder Structure
+\f0\b0 \
+package.json - contains dependencies and scripts required for the project\
+package-lock.json - consistent installation of your dependencies\
+node_modules - folder where all the dependencies are installed\
+manifest.json - for progressive web app\
+index.html is the only HTML file that you are going to have in your application. We will build SPA and this is it. View might change dynamically in the browser. Normally you are not going to change this file (specially body tag). 
+\f1\b Here React is going to control UI and for that you have one div tag <div id="root"></div>
+\f0\b0 \
+Starting point for our Application is index.js. In index.js we specify root component which is App component and DOM element which will be controlled by React. The DOM element in our example is an element with an id of root (and this the element in our index.html file). We call this div element as the root DOM node because everything inside it will be controlled by React. For the hello world application the app component is rendered inside root DOM node.\
+Now app component is in App.js file. App component represnts the view which we see in the browser.\
+App.css - For CSS\
+App.test.js - for unit test case\
+//serviceWorker.js - for progressive web app //needed to be checked\
+\
+
+\f1\b Flow 
+\f0\b0 \
+npm start - index.html is served in the browser. index.html contains the root DOM node. Then control enters in index.js file. React DOM renders the App component on to the root DOM node. The App component contains HTML (App.js) which is ultimately displayed in the browser.\
+\
+
+\f1\b Components
+\f0\b0 \
+
+\f1\b Functional Components
+\f0\b0 \
+In App.js file remove all the code except div tag. Now let us make our component\
+Make a folder components in src folder and make a file Greet.js\
+import React from 'react' \
+function Greet()\{\
+	return <h1>Hello Manish</h1>\
+\}\
+\
+Now Greet function is not connected to our application. First we need to export the Greet function from Greet.js and import it in App.js and then include it in App component.\
+So in Greet.js file\
+import React from 'react'\
+function Greet()\{\
+	return <h1>Hello Manish</h1>\
+\}\
+export default Greet\
+\
+In App.js \
+import Greet from './components/Greet'\
+and in the div tag\
+<Greet></Greet> (and if there is no content then you can also use self closing tag)\
+Check in browser\
+\
+Now rewriting the code with arrow function\
+In Greet.js file\
+import React from 'react'\
+//function Greet()\{\
+//	return <h1>Hello Manish</h1>\
+//\}\
+const Greet=()=><h1>Hello Manish</h1>\
+export default Greet\
+Check it.\
+\
+
+\f1\b Please note that we are exporting Greet component (in Greet.js file)as a default export. This allows us to import the component with any name.
+\f0\b0 \
+In App.js file\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\partightenfactor0
+\cf0 import logo from './logo.svg';\
+import './App.css';\
+import MyComponent from './components/Greet';  //Greet changed to MyComponent\
+\
+function App() \{\
+  return (\
+    <div className="App">\
+      <MyComponent></MyComponent>\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+Another way (
+\f1\b Named export
+\f0\b0 ). In this situation you have to import the component with the exact same name.\
+In Greet.js file\
+import React from 'react'\
+//function Greet()\{\
+//	return <h1>Hello Manish</h1>\
+//\}\
+export const Greet=()=><h1>Hello Manish</h1>\
+//export default Greet\
+\
+Save it and see the error in browser. So change in App.js to import Greet\
+import logo from './logo.svg';\
+import './App.css';\
+import \{Greet\} from './components/Greet'; \
+\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Greet></Greet>\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+Check it\
+\
+We'll be using default export. So revert back to it in Greet.js file.\
+import React from 'react'\
+//function Greet()\{\
+//	return <h1>Hello Manish</h1>\
+//\}\
+const Greet=()=><h1>Hello Manish</h1>\
+export default Greet\
+\
+and in App.js file\
+\
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  \
+\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Greet></Greet>\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 Class Components
+\f0\b0 \
+In components folder make a file called Welcome.js\
+import React,\{Component\} from 'react'\
+class Welcome extends Component\{\
+	render()\{\
+		return <h1> Class Component</h1>\
+	\}\
+\}\
+export default Welcome\
+\
+And in App.js (import Welcome from'./components/Welcome') and add the Welcome tag\
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  \
+import Welcome from'./components/Welcome'\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Greet></Greet>\
+      <Welcome></Welcome>\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+Check it\
+\
+
+\f1\b Now in all the components we are returning regular HTML. But it is not regular HTML - it is JSX.
+\f0\b0 \
+\
+
+\f1\b Stateful and hooks available in Functional components also
+\f0\b0 \
+\
+
+\f1\b JSX
+\f0\b0 \
+
+\f1\b We'll create a React component without using JSX and with using JSX
+\f0\b0 \
+Make a new file Hello.js file in components folder.\
+import React from 'react'\
+const Hello=()=>\{\
+    return (\
+        <div>\
+            <h1>Hello Manish</h1>   //This appears to be returning HTML but is JSX\
+        </div>\
+    )\
+\}\
+export default Hello\
+\
+Now in App.js import the component and use the tag\
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet'; \
+import Welcome from'./components/Welcome'\
+import Hello from './components/Hello';\
+function App() \{\
+  return (\
+    <div className="App">\
+      \{/* \{ <Greet></Greet> \}\
+      \{ <Welcome></Welcome> \} */\}\
+      <Hello></Hello>\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+Check it\
+
+\f1\b This is JSX version of Hello component
+\f0\b0 \
+\
+
+\f1\b Now let's do it without using JSX
+\f0\b0 \
+\
+In React library we have a method createElement which takes minimum 3 parameters. The first parameters is a string which specifies the HTML tag to be rendered. The second parameter we can pass optional properties. The third parameter is the children of HTML element.\
+So in Hello.js\
+import React from 'react'\
+const Hello=()=>\{\
+    // return (\
+    //     <div>\
+    //         Hello Manish\
+    //     </div>\
+    // )\
+    return React.createElement('div',null,'Hello Manish!')\
+\}\
+export default Hello\
+\
+Check it\
+Now let's try to include h1 tag into it.\
+\
+import React from 'react'\
+const Hello=()=>\{\
+    // return (\
+    //     <div>\
+    //         Hello Manish\
+    //     </div>\
+    // )\
+    return React.createElement('div',null,'<h1>Hello Manish!</h1>')\
+\}\
+export default Hello \
+\
+Check it\
+h1 tag is not rendered in browser. Inspect the element - you'll find h1 is a inner text to the div tag and h1 tag is not a DOM node. Let's make it work. createElement method can accept any number of parameters as children. So let's split h1 tag and text into two elements. So\
+\
+import React from 'react'\
+const Hello=()=>\{\
+    // return (\
+    //     <div>\
+    //         Hello Manish\
+    //     </div>\
+    // )\
+    return React.createElement('div',null,'h1','Hello Manish!!')\
+\}\
+export default Hello \
+\
+Again check in browser. Inspect the element. Now div element contains two text nodes. To render h1 element again call createElement method.\
+import React from 'react'\
+const Hello=()=>\{\
+    // return (\
+    //     <div>\
+    //         Hello Manish\
+    //     </div>\
+    // )\
+    return React.createElement('div',null,React.createElement('h1',null,'Hello Manish!'))\
+\}\
+export default Hello\
+\
+Check it.\
+\
+
+\f1\b Now 2nd parameter of createElement method. The second parameter is an object of Key Value pair that will be applied to the element.
+\f0\b0  e.g. id attribute for div tag.\
+\
+import React from 'react'\
+const Hello=()=>\{\
+    // return (\
+    //     <div>\
+    //         Hello Manish\
+    //     </div>\
+    // )\
+    return React.createElement(\
+        'div',\
+        \{'id':'Hello'\},\
+        React.createElement('h1',null,'Hello Manish!'))\
+\}\
+export default Hello\
+\
+Check in browser inspector.\
+\
+
+\f1\b Now let's try to add class to the div tag. 
+\f0\b0 \
+\
+import React from 'react'\
+const Hello=()=>\{\
+    // return (\
+    //     <div>\
+    //         Hello Manish\
+    //     </div>\
+    // )\
+    return React.createElement(\
+        'div',\
+        \{id:'Hello', class:'dummyClass'\},\
+        React.createElement('h1',null,'Hello Manish!'))\
+\}\
+export default Hello\
+\
+Check in Inspector. Now open Console of Browser. You'll see errors. Invalid DOM property `class`. Did you mean `className`?\
+I
+\f1\b n JS class is a reserved word. We have seen class keyword to create React components. So in React a CSS class has to be specified using the className attribute.
+\f0\b0  So instead of class it has to be className. \
+\
+import React from 'react'\
+const Hello=()=>\{\
+    // return (\
+    //     <div>\
+    //         Hello Manish\
+    //     </div>\
+    // )\
+    return React.createElement(\
+        'div',\
+        \{id:'Hello', className:'dummyClass'\},\
+        React.createElement('h1',null,'Hello Manish!'))\
+\}\
+export default Hello\
+ \
+Check in Inspector. Now open Console of Browser. 
+\f1\b Now there are no errors.
+\f0\b0 \
+\
+Now the same in JSX code (written earlier)\
+const Hello=()=>\{\
+     return (\
+         <div className='dummyClass'> //Here\
+             Hello Manish\
+         </div>\
+     )\
+    //return React.createElement(\
+    //    'div',\
+    //    \{id:'Hello', className:'dummyClass'\},\
+    //    React.createElement('h1',null,'Hello Manish!'))\
+\}\
+\
+We have seen both the approach and we can see which one is easier. 
+\f1\b Basically each JSX element is just syntactic sugar for calling React.createElement and that is why you have to import React library when you use JSX
+\f0\b0 . e.g. In Greet.js file why React was imported? Because JSX translate it into React.createElement which in turn is using React library.\
+So when you have lot of elements you should use JSX\
+\
+https://github.com/facebook/react/issues/13525\
+\
+
+\f1\b Props
+\f0\b0 \
+\
+Reuse the Greet component in App.js file\
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  //Greet changed to MyComponent\
+import Welcome from'./components/Welcome'\
+import Hello from './components/Hello';\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Greet/>\
+      <Greet/>\
+      <Greet/>\
+      \
+      \{/* <Welcome></Welcome> \
+      <Hello></Hello> */\}\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+
+\f1\b Now passing the name to Greet tag.
+\f0\b0  props short for properties is the optional input that your component can accept. It also allows component to be dynamic.\
+In App.js\
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  //Greet changed to MyComponent\
+import Welcome from'./components/Welcome'\
+import Hello from './components/Hello';\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Greet name='Anil'/>\
+      <Greet name='Sunil'/>\
+      <Greet name='Mahesh'/>\
+      \
+      \{/* <Welcome></Welcome> \
+      <Hello></Hello> */\}\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+Now to retrieve the values. In Greet.js file\
+import React from 'react'\
+//function Greet()\{\
+//	return <h1>Hello Manish</h1>\
+//\}\
+const Greet = (props) => \{\
+    console.log(props)\
+    return <h1>Hello Manish</h1>\
+\}\
+export default Greet\
+\
+Check in browser console.\
+https://reactjs.org/blog/2015/09/02/new-react-developer-tools.html#installation\
+\
+Now to display it in browser.\
+import React from 'react'\
+//function Greet()\{\
+//	return <h1>Hello Manish</h1>\
+//\}\
+const Greet = (props) => \{\
+    console.log(props)\
+    return <h1>Hello \{props.name\}</h1>\
+\}\
+export default Greet \
+\
+
+\f1\b \{\} - to evaluate JSX expression.
+\f0\b0 \
+\
+Add one more props address\
+In App.js \
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  //Greet changed to MyComponent\
+import Welcome from'./components/Welcome'\
+import Hello from './components/Hello';\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Greet name='Anil' address='abc'/>\
+      <Greet name='Sunil'address='hjk'/>\
+      <Greet name='Mahesh' address='xyz'/>\
+      \
+      \{/* <Welcome></Welcome> \
+      <Hello></Hello> */\}\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+And in Greet.js file\
+import React from 'react'\
+//function Greet()\{\
+//	return <h1>Hello Manish</h1>\
+//\}\
+const Greet = (props) => \{\
+    console.log(props)\
+    return <h1>Hello \{props.name\} Address is \{props.address\}</h1>\
+\}\
+export default Greet\
+\
+
+\f1\b Now if some content is passed in a tag and we want to render that content. We'll pass the content inside tag and retrieve it using children property of props object.
+\f0\b0  In App.js file\
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  //Greet changed to MyComponent\
+import Welcome from'./components/Welcome'\
+import Hello from './components/Hello';\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Greet name='Anil' address='abc'>\
+        <p>A sample text</p>\
+      </Greet>\
+      <Greet name='Sunil'address='hjk'/>\
+      <Greet name='Mahesh' address='xyz'/>\
+      \
+      \{/* <Welcome></Welcome> \
+      <Hello></Hello> */\}\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+In Greet.js\
+import React from 'react'\
+//function Greet()\{\
+//	return <h1>Hello Manish</h1>\
+//\}\
+const Greet = (props) => \{\
+    console.log(props)\
+    return (\
+            <h1>Hello \{props.name\} Address is \{props.address\}</h1>\
+            \{props.children\}\
+    )\
+\}\
+\
+\
+
+\f1\b Save and check in browser. It will show an error. This is because JSX should contain one wrapper element. So let us enclose it in div tag.
+\f0\b0 \
+\
+import React from 'react'\
+//function Greet()\{\
+//	return <h1>Hello Manish</h1>\
+//\}\
+const Greet = (props) => \{\
+    console.log(props)\
+    return (\
+        <div>\
+            <h1>Hello \{props.name\} Address is \{props.address\}</h1>\
+            \{props.children\}\
+        </div>\
+    )\
+\}\
+export default Greet\
+\
+Again check\
+\
+
+\f1\b Now adding a button to second Greet tag in App.js file
+\f0\b0 \
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  //Greet changed to MyComponent\
+import Welcome from'./components/Welcome'\
+import Hello from './components/Hello';\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Greet name='Anil' address='abc'>\
+        <p>A sample text</p>\
+      </Greet>\
+      <Greet name='Sunil'address='hjk'>\
+        <button>Ok</button>\
+      </Greet>\
+      <Greet name='Mahesh' address='xyz'/>\
+      \
+      \{/* <Welcome></Welcome> \
+      <Hello></Hello> */\}\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+Check it\
+So for the properties you know for sure are going to be passed - you can pass them as attribute.\
+If you don't know what is going to be passed as props (or if you have to pass dynamic HTML content) - pass it in between the component tag and in the component definition - render the component as \{props.children\}. If something is specified it will be rendered in the browser.\
+\
+
+\f1\b Now props with a class component.
+\f0\b0  Welcome is a class component. In App.js file\
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  //Greet changed to MyComponent\
+import Welcome from'./components/Welcome'\
+import Hello from './components/Hello';\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Greet name='Anil' address='abc'>\
+        <p>A sample text</p>\
+      </Greet>\
+      <Greet name='Sunil'address='hjk'>\
+        <button>Ok</button>\
+      </Greet>\
+      <Greet name='Mahesh' address='xyz'/>\
+      \
+      <Welcome name='Anil' address='abc'/>\
+      <Welcome name='Sunil'address='hjk'/>\
+      <Welcome name='Mahesh' address='xyz'/>\
+      \{/*<Hello></Hello> */\}\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+In Welcome.js file - In class component properties are available through this.props which is reserved in class component.\
+import React,\{Component\} from 'react'\
+class Welcome extends Component\{\
+	render()\{\
+		return <h1> Name \{this.props.name\} Address \{this.props.address\}</h1>\
+	\}\
+\}\
+export default Welcome\
+\
+Check it\
+\
+
+\f1\b props are immutable. 
+\f0\b0 Try this code in Greet.js file\
+import React from 'react'\
+//function Greet()\{\
+//	return <h1>Hello Manish</h1>\
+//\}\
+const Greet = (props) => \{\
+    console.log(props)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx11410\pardirnatural\partightenfactor0
+\cf0     props.name="Naveen" //Here\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0     return (\
+        <div>\
+            <h1>Hello \{props.name\} Address is \{props.address\}</h1>\
+            \{props.children\}\
+        </div>\
+    )\
+\}\
+export default Greet\
+\
+Check it. Cannot assign to read only property 'name' of object '#<Object>'\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 Now if props are immutable then how do we maintain component data that may change over a period of time.
+\f0\b0 \
+\
+
+\f1\b State
+\f0\b0 \
+We have seen every React component returns JSX which describes user interface. We have seen using props to render the data. A second way of doing it is state.\
+How state can be used in class component.\
+Create a file Message.js in Components folder. Copy the code from Welcome.js in Message.js. Change the class name to Message and export the same.\
+import React,\{Component\} from 'react'\
+class Message extends Component\{\
+	render()\{\
+		return <h1> Welcome visitor</h1>\
+	\}\
+\}\
+export default Message\
+\
+Now in App.js\
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  \
+import Welcome from'./components/Welcome'\
+import Hello from './components/Hello';\
+import Message from './components/Message';\
+function App() \{\
+  return (\
+    <div className="App">\
+      <Message />\
+      \{/* <Greet name='Anil' address='abc'>\
+        <p>A sample text</p>\
+      </Greet>\
+      <Greet name='Sunil'address='hjk'>\
+        <button>Ok</button>\
+      </Greet>\
+      <Greet name='Mahesh' address='xyz'/>\
+      \
+      <Welcome name='Anil' address='abc'/>\
+      <Welcome name='Sunil'address='hjk'/>\
+      <Welcome name='Mahesh' address='xyz'/> */\}\
+      \{/*<Hello></Hello> */\}\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+
+\f1\b Now we want to add a Subscribe/OK button and on clicking that button message should change to Thank you for subscribing.
+\f0\b0  Now if message is sent as a property it will not work as props are immutable. So we have to use component state. First create a state object and initialize it and it is done inside the class constructor. 
+\f1\b First line should be a call to super() because we extend React component class and a call has to be made to a base class constructor.
+\f0\b0  And then you can create  your state object.\
+In Message.js file\
+import React,\{Component\} from 'react'\
+class Message extends Component\{\
+    constructor()\{\
+        super()\
+        this.state=\{\
+            \
+        \}\
+    \}\
+	render()\{\
+		return <h1> Welcome visitor</h1>\
+	\}\
+\}\
+export default Message\
+\
+
+\f1\b state is a reserved keyword in React. 
+\f0\b0 \
+\
+Now adding a property in state\
+import React,\{Component\} from 'react'\
+class Message extends Component\{\
+    constructor()\{\
+        super()\
+        this.state=\{\
+            message:'Welcome Visitor'\
+        \}\
+    \}\
+	render()\{\
+		return <h1>\{this.state.message\}</h1>\
+	\}\
+\}\
+export default Message\
+\
+Check it\
+\
+
+\f1\b Now for button element
+\f0\b0 \
+\
+
+\f1\b We need to add parenthesis to return statement and also create an enclosing div tag. Parenthesis are required because JSX spans over multiple lines and we need an enclosing div tag because React only wants one elemnt returned.
+\f0\b0 \
+\
+import React,\{Component\} from 'react'\
+class Message extends Component\{\
+    constructor()\{\
+        super()\
+        this.state=\{\
+            message:'Welcome Visitor'\
+        \}\
+    \}\
+	render()\{\
+		return (\
+            <div>\
+                <h1>\{this.state.message\}</h1>\
+                <button>Subscribe </button>\
+            </div>\
+        )\
+        \
+	\}\
+\}\
+export default Message\
+\
+Check it.\
+
+\f1\b Now for click event.(onClick camel Case)
+\f0\b0 \
+In Message.js\
+import React,\{Component\} from 'react'\
+class Message extends Component\{\
+    constructor()\{\
+        super()\
+        this.state=\{\
+            message:'Welcome Visitor'\
+        \}\
+    \}\
+    changeMessage()\{\
+        this.setState(\{\
+            message: 'Thank you for Subscribing'\
+        \})\
+    \}\
+	render()\{\
+		return (\
+            <div>\
+                <h1>\{this.state.message\}</h1>\
+                <button onClick=\{()=>this.changeMessage()\}>Subscribe </button>\
+            </div>\
+        )\
+        \
+	\}\
+\}\
+export default Message\
+\
+Check it\
+\
+This demo shows what state is. 
+\f1\b A state is an Object that is privately maintained in component. A state can influence what is rendered in the browser. State can be changed within the component.
+\f0\b0 \
+ \
+\
+\
+\
+\
+\
+\
+\
+
+\f1\b setState
+\f0\b0 \
+
+\f1\b Install ES7 React/Redux/GraphQL/React-Native snippets in VS code
+\f0\b0 \
+Let us create a counter component.\
+Create Counter.js file in components folder\
+
+\f1\b In Counter.js file type rce followed by tab
+\f0\b0 \
+We want only default export so remove named export\
+import React, \{ Component \} from 'react'\
+\
+class Counter extends Component \{\
+    render() \{\
+        return (\
+            <div>\
+                count\
+            </div>\
+        )\
+    \}\
+\}\
+\
+export default Counter\
+\
+Add Counter component in App component\
+\
+import logo from './logo.svg';\
+import './App.css';\
+import Greet from './components/Greet';  \
+import Welcome from'./components/Welcome'\
+import Hello from './components/Hello';\
+import Message from './components/Message';\
+import Counter from './components/Counter';\
+function App() \{\
+  return (\
+    <div className="App">\
+      \{/* <Message /> */\}\
+      <Counter/>\
+      \{/* <Greet name='Anil' address='abc'>\
+        <p>A sample text</p>\
+      </Greet>\
+      <Greet name='Sunil'address='hjk'>\
+        <button>Ok</button>\
+      </Greet>\
+      <Greet name='Mahesh' address='xyz'/>\
+      \
+      <Welcome name='Anil' address='abc'/>\
+      <Welcome name='Sunil'address='hjk'/>\
+      <Welcome name='Mahesh' address='xyz'/> */\}\
+      \{/*<Hello></Hello> */\}\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+Now we need count state to keep track of counter value. And we initialize state in the constructor. 
+\f1\b The snippet is rconst (type rconst in Counter.js class and press tab.
+\f0\b0 \
+\
+import React, \{ Component \} from 'react'\
+\
+class Counter extends Component \{\
+    constructor(props) \{\
+        super(props)\
+    \
+        this.state = \{\
+             \
+        \}\
+    \}\
+    \
+    render() \{\
+        return (\
+            <div>\
+                count\
+            </div>\
+        )\
+    \}\
+\}\
+\
+export default Counter\
+  \
+
+\f1\b We can initialize count state in constructor and in div tag use it.
+\f0\b0 \
+import React, \{ Component \} from 'react'\
+\
+class Counter extends Component \{\
+    constructor(props) \{\
+        super(props)\
+    \
+        this.state = \{\
+             count: 0\
+        \}\
+    \}\
+    \
+    render() \{\
+        return (\
+            <div>\
+                count - \{this.state.count\}\
+            </div>\
+        )\
+    \}\
+\}\
+\
+export default Counter\
+\
+
+\f1\b Now add a button to increment count value
+\f0\b0 \
+import React, \{ Component \} from 'react'\
+\
+class Counter extends Component \{\
+    constructor(props) \{\
+        super(props)\
+    \
+        this.state = \{\
+             count: 0\
+        \}\
+    \}\
+    increment()\{\
+        this.state.count=this.state.count+1  //We should have use setState method\
+        console.log(this.state.count)\
+    \}\
+    render() \{\
+        return (\
+            <div>\
+            <div>\
+                count - \{this.state.count\}\
+            </div>\
+            <button onClick=\{()=>this.increment()\}>Increment</button>\
+            </div>\
+        )\
+    \}\
+\}\
+\
+export default Counter\
+\
+
+\f1\b Check in browser and open console. The value doesn't gets updated in UI but is changed in console. It means UI is not re-rendering when the state is changing. And this is the main reason - we should not modify the state directly. Use setState method
+\f0\b0 \
+import React, \{ Component \} from 'react'\
+\
+class Counter extends Component \{\
+    constructor(props) \{\
+        super(props)\
+    \
+        this.state = \{\
+             count: 0\
+        \}\
+    \}\
+    increment()\{\
+        this.setState(\{\
+            count: this.state.count+1\
+        \})\
+        console.log(this.state.count)\
+    \}\
+    render() \{\
+        return (\
+            <div>\
+            <div>\
+                count - \{this.state.count\}\
+            </div>\
+            <button onClick=\{()=>this.increment()\}>Increment</button>\
+            </div>\
+        )\
+    \}\
+\}\
+\
+export default Counter\
+\
+Check it. 
+\f1\b Now console value is one less than rendered value. It is because the call to setState are asynchronous. So console.log is being called before the state is being set. Now if you want to call the code after state has been updated pass the code as a callback function as a second argument to setState method.
+\f0\b0 \
+import React, \{ Component \} from 'react'\
+\
+class Counter extends Component \{\
+    constructor(props) \{\
+        super(props)\
+    \
+        this.state = \{\
+             count: 0\
+        \}\
+    \}\
+    increment()\{\
+        this.setState(\{\
+            count: this.state.count+1\
+        \},()=>\{console.log('Callback Value : '+this.state.count)\})\
+        console.log(this.state.count)\
+    \}\
+    render() \{\
+        return (\
+            <div>\
+            <div>\
+                count - \{this.state.count\}\
+            </div>\
+            <button onClick=\{()=>this.increment()\}>Increment</button>\
+            </div>\
+        )\
+    \}\
+\}\
+\
+export default Counter\
+\
+Check it\
+----------------\
+Now make incrementFive method and call this.increment() five times. And onClick method to incrementFive()\
+import React, \{ Component \} from 'react'\
+\
+class Counter extends Component \{\
+    constructor(props) \{\
+        super(props)\
+    \
+        this.state = \{\
+             count: 0\
+        \}\
+    \}\
+    increment()\{\
+        this.setState(\{\
+            count: this.state.count+1\
+        \},()=>\{console.log('Callback Value : '+this.state.count)\})\
+        console.log(this.state.count)\
+    \}\
+    incrementFive()\{\
+        this.increment();\
+        this.increment();\
+        this.increment();\
+        this.increment();\
+        this.increment();\
+        \
+    \}\
+    render() \{\
+        return (\
+            <div>\
+            <div>\
+                count - \{this.state.count\}\
+            </div>\
+            <button onClick=\{()=>this.incrementFive()\}>Increment</button>\
+            </div>\
+        )\
+    \}\
+\}\
+\
+export default Counter\
+\
+Check it. In the console 0 has been logged 5 times and Callback value also 5 times. Why? 
+\f1\b React will group multiple setState call into a single update for better performance.
+\f0\b0  So all five updates are done in one single go and updated value is not carry over between the different calls. \
+\
+
+\f1\b Whenever you have to update the state based on previous state you need to pass function as an argument to setState method instead of passing an object.
+\f0\b0 \
+import React, \{ Component \} from 'react'\
+\
+class Counter extends Component \{\
+    constructor(props) \{\
+        super(props)\
+    \
+        this.state = \{\
+             count: 0\
+        \}\
+    \}\
+    increment()\{\
+        // this.setState(\{\
+        //     count: this.state.count+1\
+        // \},()=>\{console.log('Callback Value : '+this.state.count)\})\
+        this.setState(previousState=>(\{\
+            count: previousState.count+1\
+        \}))\
+        console.log(this.state.count)\
+    \}\
+    incrementFive()\{\
+        this.increment();\
+        this.increment();\
+        this.increment();\
+        this.increment();\
+        this.increment();\
+        \
+    \}\
+    render() \{\
+        return (\
+            <div>\
+            <div>\
+                count - \{this.state.count\}\
+            </div>\
+            <button onClick=\{()=>this.incrementFive()\}>Increment</button>\
+            </div>\
+        )\
+    \}\
+\}\
+\
+export default Counter\
+\
+Check it\
+\
+\
+The second parameter (setState) function is props Object.\
+class Counter extends Component \{\
+    constructor(props) \{\
+        super(props)\
+    \
+        this.state = \{\
+             count: 0\
+        \}\
+    \}\
+    increment()\{\
+        // this.setState(\{\
+        //     count: this.state.count+1\
+        // \},()=>\{console.log('Callback Value : '+this.state.count)\})\
+        this.setState((previousState,props)=>(\{      //Here. And then you can utilize props\
+            count: previousState.count+1\
+        \}))\
+        console.log(this.state.count)\
+    \}\
+    incrementFive()\{\
+        this.increment();\
+        this.increment();\
+        this.increment();\
+        this.increment();\
+        this.increment();\
+        \
+    \}\
+    render() \{\
+        return (\
+            <div>\
+            <div>\
+                count - \{this.state.count\}\
+            </div>\
+            <button onClick=\{()=>this.incrementFive()\}>Increment</button>\
+            </div>\
+        )\
+    \}\
+\}\
+\
+export default Counter\
+\
+\
+\
+\
+\
+ }
